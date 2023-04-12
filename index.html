@@ -1,1 +1,609 @@
+<html>
+<head>
+<style>
+    :root {
+  --background-color: rgb(6, 11, 25);
+  --border-color: rgb(255, 255, 255, 0.1);
+  --highlight-color: rgb(126, 87, 194);
+  --yt-color: rgb(229, 57, 53);
+}
 
+body {
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0px;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, a, p, span, li {
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  color: white;
+  margin: 0px;
+}
+
+li {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.25em;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--highlight-color);
+}
+
+nav {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+}
+
+nav .nav-section {
+  padding: 3rem 2rem;
+  display: flex;
+  gap: 1rem;
+  border-left: 1px solid var(--border-color);
+  align-items: center;
+  justify-content: center;
+}
+
+#nav-mobile-section {
+  display: flex;
+  flex-basis: calc(100% * (2 / 3));
+  z-index: 2;
+}
+
+#nav-toggle-button { 
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-left: 1px solid var(--border-color);
+  color: white;
+  cursor: pointer;
+  display: none;
+  gap: 0.8rem;
+  height: 100%;
+  justify-content: center;
+  outline: none;
+  padding: 0rem 3rem;
+  position: relative;
+  z-index: 3;
+}
+
+#nav-toggle-button:hover,
+#nav-toggle-button:hover > span {
+  color: var(--highlight-color);
+}
+
+#nav-toggle-button > span,
+#nav-toggle-button > i { 
+  display: inline-block;
+  height: 1rem;
+  line-height: 1rem;
+}
+
+#nav-social-section,
+#nav-contact-section {
+  flex-grow: 1;
+}
+
+#nav-logo-section {
+  flex-basis: calc(100% / 3);
+  justify-content: flex-start;
+}
+
+#nav-logo-section > a > i {
+  font-size: 2.5rem;
+}
+
+#nav-link-section {
+  flex-basis: 50%;
+  gap: 6rem; 
+}
+
+#nav-social-section {
+  gap: 3rem;
+}
+
+main {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+main > article {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  transition: transform 400ms ease;  
+}
+
+main > article[data-status="inactive"] {
+  transform: translateX(-100%);
+  transition: none;
+}
+
+main > article[data-status="active"] {
+  transform: translateX(0%);
+}
+
+main > article[data-status="before"] {
+  transform: translateX(-100%);
+}
+
+main > article[data-status="after"] {
+  transform: translateX(100%);
+}
+
+main > article[data-status="becoming-active-from-before"] {
+  transform: translateX(-100%);
+  transition: none;
+}
+
+main > article[data-status="becoming-active-from-after"] {
+  transform: translateX(100%);
+  transition: none;
+}
+
+main > article > .article-section {
+  height: 100%;
+  display: flex;
+}
+
+main > article > .article-description-section,
+main > article > .article-nav-section {
+  border-left: 1px solid var(--border-color);
+}
+
+main > article > .article-title-section,
+main > article > .article-nav-section {
+  border-top: 1px solid var(--border-color);
+}
+
+main > article:first-child > .article-image-section {
+  background-image: url("https://images.unsplash.com/photo-1582408921715-18e7806365c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+}
+
+main > article:nth-child(2) > .article-image-section {
+  background-image: url("https://images.unsplash.com/photo-1663163103116-bae8c8f6a00c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+}
+
+main > article:nth-child(3) > .article-image-section {
+  background-image: url("https://images.unsplash.com/photo-1621408422508-240627e2252a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+}
+
+main > article:nth-child(4) > .article-image-section {
+  background-image: url("https://images.unsplash.com/photo-1604187351574-c75ca79f5807?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+}
+main > article:nth-child(5) > .article-image-section {
+  background-image: url("https://images.unsplash.com/photo-1681121881794-d3683ede874b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2281&q=830");
+}
+
+
+main > article > .article-image-section {
+  background-position: center;
+  background-size: cover;
+}
+
+main > article > .article-description-section {
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 4rem; 
+}
+
+main > article > .article-description-section > p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.25em;
+}
+
+main > article > .article-description-section > p  > a:hover {
+  text-decoration: underline;
+}
+
+main > article > .article-title-section {
+  align-items: center; 
+  justify-content: space-between;
+  padding: 2rem 4rem;
+}
+
+main > article > .article-title-section * {
+  color: white;
+}
+
+main > article > .article-title-section > h2 {
+  flex-basis: 50%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3.5rem;
+  line-height: 3rem;
+  margin: 0px;
+  text-transform: uppercase;
+}
+
+main > article > .article-title-section > i {
+  color: rgba(255, 255, 255, 0.75);
+  font-size:  4rem;
+}
+
+main > article > .article-nav-section > .article-nav-button {
+  background-color: transparent;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+main > article > .article-nav-section > .article-nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+main > article > .article-nav-section > .article-nav-button:nth-child(2) {
+  border-left: 1px solid var(--border-color);
+}
+
+@media(max-width: 1200px) {    
+  #nav-mobile-section {
+    flex-basis: calc(100% * 0.75);
+  }
+
+  #nav-logo-section {
+    flex-basis: calc(100% * 0.25);
+  }
+  
+  #nav-link-section {
+    flex-basis: calc(100% / 3);
+    gap: 3rem;
+  }
+
+  main {
+    overflow-y: auto;
+  }
+  
+  main > article {
+    grid-template-columns: none;
+    grid-template-rows: 1.5fr repeat(3, 0.75fr) 0.25fr;
+    height: max(900px, 100%);
+  }
+   
+  main > article > .article-title-section > h2 {
+    font-size: 3rem; 
+    line-height: 2.6rem;
+  }
+  
+  main > article > .article-title-section > i {
+    font-size: 3rem; 
+  }
+  
+  main > article > .article-description-section,
+  main > article > .article-nav-section {
+    border-left: none;
+  }
+
+  main > article > .article-image-section {
+    order: 1;
+  }
+  
+  main > article > .article-title-section {
+    border-bottom: 1px solid var(--border-color);
+    order: 2;
+  }
+  
+  main > article > .article-description-section {
+    justify-content: center;
+    order: 3;
+  }
+  
+  main > article > .article-nav-section {
+    border-bottom: 1px solid var(--border-color);
+    order: 4;
+  }
+}
+
+@media(max-width: 800px) {  
+  nav {
+    justify-content: space-between;  
+  }
+  
+  nav[data-toggled="true"] > #nav-mobile-section {  
+    transform: translateY(0%);
+  }
+
+  nav[data-toggled="true"] > #nav-toggle-button {
+    border-left: none;
+  }
+
+  nav[data-transitionable="true"] > #nav-mobile-section {
+    transition: transform 400ms ease;
+  }
+  
+  nav .nav-section {
+    border-left: none;
+    padding: 1.5rem 1rem;
+  }
+  
+  #nav-logo-section > a > i {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+  
+  #nav-mobile-section {
+    background-color: var(--background-color);
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    transform: translateY(-100%);
+  } 
+  
+  #nav-toggle-button {
+    display: flex;
+  }  
+  
+  
+  #nav-link-section {
+    flex-basis: 60%;
+    flex-direction: column;
+    gap: 0rem;
+  }
+  
+  #nav-link-section > a {
+    font-size: 8rem; 
+  }
+  
+  #nav-social-section > a {
+    font-size: 2rem; 
+  }  
+  
+  #nav-contact-section {
+    padding-bottom: 4rem;
+  }
+  
+  main > article {
+    grid-template-rows: 1fr repeat(4, 0.5fr);
+    height: max(700px, 100%);
+  }
+  
+  main > article > .article-title-section {
+    padding: 2rem;
+  }
+  
+  main > article > .article-title-section > h2 {
+    flex-basis: 70%;
+    font-size: 1.75em; 
+    line-height: 1.5rem;
+  }
+  
+  main > article > .article-title-section > i {
+    font-size: 2rem; 
+  }
+  
+  main > article > .article-description-section {
+    padding: 2rem;
+  }
+  
+  main > article > .article-description-section > p {
+    font-size: 1rem;
+  }
+}
+
+/* -- YT link / Source link styles -- */
+
+main > article > .article-description-section > p  > .source-link {
+  color: var(--highlight-color);
+  display: inline;
+}
+
+main > article .yt-link,
+main > article .yt-link > i {
+  color: var(--yt-color);
+  display: inline;
+}
+
+.fa-plus-large {
+  opacity: 0;
+}
+</style>
+</head>
+<body>
+    <nav data-toggled="false" data-transitionable="false">
+        <div id="nav-mobile-section">
+           <div id="nav-link-section" class="nav-section">
+             <a href="#" style="transform: translateX(-70%);">Recycling - A Website By Arvin</a>
+           </div>
+       </nav>
+       
+       <main>
+         <article data-index="0" data-status="active">
+           <div class="article-image-section article-section"></div>
+           <div class="article-description-section article-section">
+             <p>
+               Recycling is the process of collecting and processing materials that would otherwise be thrown away as trash and turning them into new products. The purpose of recycling is to conserve natural resources, reduce waste, and minimize the environmental impact of human activities. Recycling can include a variety of materials such as paper, plastic, glass, metal, and electronic waste.
+             </p>
+           </div>
+           <div class="article-title-section article-section">
+             <h2>What is Recycling?</h2>
+             <i class="fa-light fa-plus-large"></i>
+           </div>
+           <div class="article-nav-section article-section">
+             <button class="article-nav-button" type="button" onclick="handleLeftClick()">
+               <i class="fa-light fa-arrow-left-long"></i>
+             </button>
+             <button class="article-nav-button" type="button" onclick="handleRightClick()">
+               <i class="fa-light fa-arrow-right-long"></i>
+             </button>
+           </div>
+         </article>
+         <article data-index="1" data-status="inactive">    
+           <div class="article-image-section article-section"></div>
+           <div class="article-description-section article-section">
+             <p>One of the main challenges of recycling is contamination. Contamination occurs when people attempt to recycle materials that are not recyclable or place them in the wrong bin. Paper cups, plastic bags, pizza boxes, or unwashed containers are just a few examples of materials that can contaminate a batch of recyclable materials and make them unusable. Contamination can have negative impacts on the recycling system, including increasing waste, damaging machinery, putting workers in danger, and reducing the quality of recycled products. To avoid these negative impacts of contamination, it is important to follow some basic guidelines when recycling.</p>
+           </div>
+           <div class="article-title-section article-section">
+               <h2>Challenges of Recycling</h2>
+             <i class="fa-light fa-plus-large"></i>
+           </div>
+           <div class="article-nav-section article-section">
+             <button class="article-nav-button" type="button" onclick="handleLeftClick()">
+               <i class="fa-light fa-arrow-left-long"></i>
+             </button>
+             <button class="article-nav-button" type="button" onclick="handleRightClick()">
+               <i class="fa-light fa-arrow-right-long"></i>
+             </button>
+           </div>
+         </article>
+         <article data-index="2" data-status="inactive">    
+           <div class="article-image-section article-section"></div>
+           <div class="article-description-section article-section">
+             <p>Responsible recycling is an essential part of the waste management process. By following some basic guidelines, you can help reduce contamination and improve the efficiency and effectiveness of recycling. Here are some tips for recycling responsibly:
+             <p>&nbsp;</p>
+               <li>Know what materials are accepted and what bin they belong to</li>
+               <li>Clean and dry your recyclables before placing them in the bin</li>
+               <li>Don't bag your recyclables unless instructed to do so</li>
+               <li>Don't recycle hazardous or dangerous materials.</li>
+       </p>
+           </div>
+           <div class="article-title-section article-section">
+             <h2>How to Recycle Responsibly</h2>
+             <i class="fa-light fa-plus-large"></i>
+           </div>
+           <div class="article-nav-section article-section">
+             <button class="article-nav-button" type="button" onclick="handleLeftClick()">
+               <i class="fa-light fa-arrow-left-long"></i>
+             </button>
+             <button class="article-nav-button" type="button" onclick="handleRightClick()">
+               <i class="fa-light fa-arrow-right-long"></i>
+             </button>
+           </div>
+         </article>
+         <article data-index="3" data-status="inactive">    
+           <div class="article-image-section article-section"></div>
+           <div class="article-description-section article-section">
+             <p>
+               In conclusion, recycling is an important part of protecting the environment and conserving natural resources. By reducing waste and reusing materials, we can minimize our impact on the planet and create a more sustainable future. However, responsible recycling requires effort and awareness from everyone involved. By following some basic guidelines and being mindful of what we throw away, we can all make a difference in the health of our planet. Thank you for learning about recycling!
+             </p>
+           </div>
+           <div class="article-title-section article-section">
+             <h2>Conclusion</h2>
+             <i class="fa-light fa-plus-large"></i>
+           </div>
+           <div class="article-nav-section article-section">
+             <button class="article-nav-button" type="button" onclick="handleLeftClick()">
+               <i class="fa-light fa-arrow-left-long"></i>
+             </button>
+             <button class="article-nav-button" type="button" onclick="handleRightClick()">
+               <i class="fa-light fa-arrow-right-long"></i>
+             </button>
+           </div>
+         </article>
+         <article data-index="4" data-status="inactive">    
+           <div class="article-image-section article-section"></div>
+           <div class="article-description-section article-section">
+             <p>
+               <a href="https://recyclops.com/understanding-recycling-contamination/">https://recyclops.com/understanding-recycling-contamination/</a>
+             </p>
+             <p>&nbsp;</p>
+             <p>
+               <a href="https://crigler.com/the-negative-impacts-of-recycling-contamination/">https://crigler.com/the-negative-impacts-of-recycling-contamination/</a>
+             </p>
+             <p>&nbsp;</p>
+             <p>
+               <a href="https://www.earthday.org/7-tips-to-recycle-better/">https://www.earthday.org/7-tips-to-recycle-better/</a>
+             </p>
+             <p>&nbsp;</p>
+             <p>
+               <a href="      https://www.conserve-energy-future.com/importance_of_recycling.php">      https://www.conserve-energy-future.com/importance_of_recycling.php</a>
+             </p>
+             
+             <p>&nbsp;</p>
+             <p>Website design from: 
+               <a href="            https://codepen.io/Hyperplexed/full/oNqVyjo">            https://codepen.io/Hyperplexed/full/oNqVyjo</a>
+             </p>
+           </div>
+           <div class="article-title-section article-section">
+             <h2>Credits</h2>
+             <i class="fa-light fa-plus-large"></i>
+           </div>
+           <div class="article-nav-section article-section">
+             <button class="article-nav-button" type="button" onclick="handleLeftClick()">
+               <i class="fa-light fa-arrow-left-long"></i>
+             </button>
+             <button class="article-nav-button" type="button" onclick="handleRightClick()">
+               <i class="fa-light fa-arrow-right-long"></i>
+             </button>
+           </div>
+         </article>
+       </main>
+
+<script>
+    /* -- Carousel Navigation -- */
+
+let activeIndex = 0;
+
+const slides = document.getElementsByTagName("article");
+
+const handleLeftClick = () => {
+  const nextIndex = activeIndex - 1 >= 0 ? activeIndex - 1 : slides.length - 1;
+  
+  const currentSlide = document.querySelector(`[data-index="${activeIndex}"]`),
+        nextSlide = document.querySelector(`[data-index="${nextIndex}"]`);
+        
+  currentSlide.dataset.status = "after";
+  
+  nextSlide.dataset.status = "becoming-active-from-before";
+  
+  setTimeout(() => {
+    nextSlide.dataset.status = "active";
+    activeIndex = nextIndex;
+  });
+}
+
+const handleRightClick = () => {
+  const nextIndex = activeIndex + 1 <= slides.length - 1 ? activeIndex + 1 : 0;
+  
+  const currentSlide = document.querySelector(`[data-index="${activeIndex}"]`),
+        nextSlide = document.querySelector(`[data-index="${nextIndex}"]`);
+  
+  currentSlide.dataset.status = "before";
+  
+  nextSlide.dataset.status = "becoming-active-from-after";
+  
+  setTimeout(() => {
+    nextSlide.dataset.status = "active";
+    activeIndex = nextIndex;
+  });
+}
+
+/* -- Mobile Nav Toggle -- */
+
+const nav = document.querySelector("nav");
+
+const handleNavToggle = () => {  
+  nav.dataset.transitionable = "true";
+  
+  nav.dataset.toggled = nav.dataset.toggled === "true" ? "false" : "true";
+}
+
+window.matchMedia("(max-width: 800px)").onchange = e => {
+  nav.dataset.transitionable = "false";
+
+  nav.dataset.toggled = "false";
+};
+</script>
+
+</body>
+</html>
